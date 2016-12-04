@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/NegatioN/VideoLabeler.svg?branch=master)](https://travis-ci.org/NegatioN/VideoLabeler)
+
 # Video Labeler
 
 This is meant to be a handy program to label data from a video.
