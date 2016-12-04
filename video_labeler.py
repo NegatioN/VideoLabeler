@@ -1,35 +1,50 @@
 import numpy as np
 import imageio
+import argparse
+import sys
 import pdb
 
 
-#TODO input should be seconds?
-#TODO make option for saving files in separate folders based on label
-#TODO make option to save as pickle / data-file with id associated to images processed.
-#TODO check how many frames of video are actually present, and stop before end to avoide crash?
+parser = argparse.ArgumentParser()
+parser.add_argument("-s", "--start", type=int, default=0, help="When should labeling start?")
+parser.add_argument("-e", "--end", type=int, help="When do you want labeling to end?")
+parser.add_argument("-p", "--path", help="Path to video-file")
+#parser.add_argument("-f", "--format", default="ffmpeg", help="Format to decode video with")
 
-filename = 'testdata/cockatoo.mp4'
-savefolder = 'output'
-video_reader = imageio.get_reader(filename,  'ffmpeg')
+options = parser.parse_args()
 
-start_second = 5
-metadata = video_reader.get_meta_data()
-fps = metadata['fps']
+def main():
 
-total_frames = metadata['nframes']
+    #TODO input should be seconds?
+    #TODO make option for saving files in separate folders based on label
+    #TODO make option to save as pickle / data-file with id associated to images processed.
+    #TODO check how many frames of video are actually present, and stop before end to avoide crash?
 
-start_frame = int(start_second * fps)  # Should math floor.
-end_frame = total_frames
+    filename = 'testdata/cockatoo.mp4'
+    savefolder = 'output'
+    video_reader = imageio.get_reader(filename,  'ffmpeg')
 
-#pdb.set_trace()
+    metadata = video_reader.get_meta_data()
+    fps = metadata['fps']
 
-#TODO frame-spectrum cannot be lower than 0 or higher than total_frames.
+    total_frames = metadata['nframes']
 
-for index in range(end_frame-start_frame):
-    frame_num = start_frame + index
-    # If frame above timestamp we care about.
-    video_frame = video_reader.get_data(frame_num)
-    print('Mean of frame %i is %1.1f' % (frame_num, video_frame.mean()))
-    imageio.imwrite('{}/{}.jpg'.format(savefolder, frame_num), video_frame)
+    start_frame = int(options.start * fps)  # Should math floor.
+    end_frame = int(options.end * fps) if options.end else total_frames
 
-video_reader.close()
+    #pdb.set_trace()
+
+    #TODO frame-spectrum cannot be lower than 0 or higher than total_frames.
+
+    for index in range(end_frame-start_frame):
+        frame_num = start_frame + index
+        # If frame above timestamp we care about.
+        video_frame = video_reader.get_data(frame_num)
+        print('Mean of frame %i is %1.1f' % (frame_num, video_frame.mean()))
+        imageio.imwrite('{}/{}.jpg'.format(savefolder, frame_num), video_frame)
+
+    video_reader.close()
+
+
+if __name__ == "__main__":
+    sys.exit(main())
