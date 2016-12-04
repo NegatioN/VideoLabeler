@@ -1,12 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-import sys
 import imageio
 import os
 
 
 def frames(start, end=0, metadata=None):
-
     fps = metadata['fps']
     total_frames = metadata['nframes']
 
@@ -17,7 +15,7 @@ def frames(start, end=0, metadata=None):
 
 def save_image(folder, name, image):
     if os.path.isdir(folder) is False:
-        os.mkdirs(folder)
+        os.makedirs(folder)
     imageio.imwrite('{}/{}.jpg'.format(folder, name), image)
     print('Saved image={} in {}'.format(name, folder))
 

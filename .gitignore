@@ -90,5 +90,5 @@ ENV/
 
 .idea/
 
-testdata/
-output/
+videolabeler/testdata/
+videolabeler/output/

@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-
-import numpy as np
-import imageio
-import argparse
 import sys
+
+from videolabeler.util import vl_util
+import argparse
 import pdb
-from videolabeler import util as vl
+import imageio
+
+#pdb.set_trace()
 
 modes = ['folder', 'pickle']
 
@@ -28,18 +29,16 @@ def main():
     #TODO verbose percentage completion etc?
     #TODO support taking in arrays of labels and timings?
 
-    filename = 'testdata/cockatoo.mp4'
+    filename = 'testdata/test.mp4'
     savefolder = 'output' if options.mode is modes[1] else 'output/{}'.format(options.label)
-    video_reader = imageio.get_reader(filename,  'ffmpeg')
 
-    start_frame, end_frame = vl.frames(options, video_reader.get_meta_data())
+    with imageio.get_reader(filename,  'ffmpeg') as video_reader:
+        start_frame, end_frame = vl_util.frames(options.start, options.end, video_reader.get_meta_data())
 
-    for index in range(end_frame-start_frame):
-        frame_num = start_frame + index
-        video_frame = video_reader.get_data(frame_num)
-        vl.save_image(savefolder, frame_num, video_frame)
-
-    video_reader.close()
+        for index in range(end_frame-start_frame):
+            frame_num = start_frame + index
+            video_frame = video_reader.get_data(frame_num)
+            vl_util.save_image(savefolder, frame_num, video_frame)
 
 
 if __name__ == "__main__":
