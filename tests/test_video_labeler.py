@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-from videolabeler.util import vl_util
-import logging
+from util import vl_util
 
 #TODO make fixtures
 total_frames = 10000

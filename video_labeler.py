@@ -1,12 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8
-import sys
-
 import argparse
 import logging
-import imageio
 import ntpath
-from videolabeler.util import vl_util
+import sys
+
+import imageio
+
+from util import vl_util
 
 modes = ['folder', 'pickle']
 
