@@ -2,23 +2,30 @@
 # -*- coding: utf-8
 import imageio
 import os
+import logging
 
 
-def frames(start, end=0, metadata=None):
-    fps = metadata['fps']
-    total_frames = metadata['nframes']
+class Util:
 
-    start_frame = int(start * fps)  # Should math floor.
-    end_frame = int(end * fps) if end < total_frames and end != 0 and end > start else total_frames
-    return start_frame, end_frame
+    def __init__(self):
+        self.logger = logging.getLogger('video_labeler')
+
+    def frames(self, start, end=0, metadata=None):
+        fps = metadata['fps']
+        total_frames = metadata['nframes']
+
+        start_frame = int(start * fps)  # Should math floor.
+        end_frame = int(end * fps) if end != 0 and total_frames > end > start else total_frames
+        self.logger.debug('Time start: {} end:{}, Frames start: {} end: {}'.format(start, end, start_frame, end_frame))
+        return start_frame, end_frame
 
 
-def save_image(folder, name, image):
-    if os.path.isdir(folder) is False:
-        os.makedirs(folder)
-    imageio.imwrite('{}/{}.jpg'.format(folder, name), image)
-    print('Saved image={} in {}'.format(name, folder))
+    def save_image(self, folder, index, image, filename):
+        if os.path.isdir(folder) is False:
+            os.makedirs(folder)
+        imageio.imwrite('{}/{}-{}.jpg'.format(folder, filename, index), image)
+        self.logger.info('Saved image={}-{} in {}'.format(filename, index, folder))
 
 
-def save_pickle(image_df, name):
-    pass
+    def save_pickle(self, image_df, name):
+        pass
