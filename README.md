@@ -4,6 +4,11 @@
 
 This is meant to be a handy program to label data from a video.
 
-This in turn should let you use the pictures generated as labeled datasets without manually labeling all your data.
+Individuals do not have as many resources to label data as organizations, and will have to take shortcuts to achieve results.
 
-Work in progress.
+My hope is that this can help me, and others generate interesting labeled datasets from videos. This can be valuable if
+the data you're seeking is usually protected heavily by copyright. You can instead generate it locally and train on it there.
+
+### Example usage:
+
+```video_labeler.py --path $MY_VIDEO_FILE_PATH --start $MY_START_TIME --end $MY_END_TIME --label $MY_LABEL_VALUE```
