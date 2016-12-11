@@ -11,4 +11,6 @@ the data you're seeking is usually protected heavily by copyright. You can inste
 
 ### Example usage:
 
-```video_labeler.py --path $MY_VIDEO_FILE_PATH --start $MY_START_TIME --end $MY_END_TIME --label $MY_LABEL_VALUE```
+(after running `python setup.py install`)
+
+```videolabeler --path $MY_VIDEO_FILE_PATH --start $MY_START_TIME --end $MY_END_TIME --label $MY_LABEL_VALUE```
