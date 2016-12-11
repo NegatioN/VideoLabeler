@@ -13,7 +13,7 @@ setup(name='VideoLabeler',
       # Entrypoints
       entry_points={
           "console_scripts": [
-              "videolabeler = video_labeler:main"
+                'videolabeler=videolabeler.videolabeler.video_labeler'
           ]
       }
       )
