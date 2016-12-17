@@ -14,3 +14,10 @@ the data you're seeking is usually protected heavily by copyright. You can inste
 (after running `python setup.py install`)
 
 ```videolabeler --path $MY_VIDEO_FILE_PATH --start $MY_START_TIME --end $MY_END_TIME --label $MY_LABEL_VALUE```
+
+You can also select from two modes of storing the data:
+
+1. Saved as images in a folder with the label name.
+2. Pickled in a numpy-array with the image data and label.
+
+Please be advised that if you choose to save it as a pickle, as of now all of the image-data is kept uncompressed in memory while doing this.
